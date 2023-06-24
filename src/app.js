@@ -9,7 +9,11 @@ const tweets = []
 const user = []
 
 app.get("/tweets", (req, res) => {
-  res.send(tweets)
+  const ultimosTweets = tweets.map((t) => {
+    const usuario = user.find((u) => u.username === t.username)
+    return { ...t, avatar: usuario.avatar }
+  })
+  res.send(ultimosTweets.slice(-10))
 })
 
 app.post("/sign-up", (req, res) => {
