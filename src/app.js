@@ -18,15 +18,16 @@ app.post("/sign-up", (req, res) => {
   res.send("Ok")
 })
 
-app.post("tweets", (req, res) => {
+app.post("/tweets", (req, res) => {
   const { username, tweet } = req.body
   const userCadastrado = user.find((u) => u.username === username)
 
   if (!userCadastrado) {
+    res.send("UNAUTHORIZED")
+    return
+  } else {
     tweets.push({ username, tweet })
     res.send("Ok")
-  } else {
-    res.send("UNAUTHORIZED")
   }
 })
 
